@@ -75,7 +75,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 15),
         userLikes: [],
-        hashtags: hashtagsData[5]._id, // react
+        hashtags: [hashtagsData[5]._id], // react
       },
       {
         author: userIds[1], // Henri
@@ -84,7 +84,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 12),
         userLikes: [],
-        hashtags: hashtagsData[3]._id, // mongodb
+        hashtags: [hashtagsData[3]._id], // mongodb
       },
       {
         author: userIds[2], // Etienne
@@ -93,7 +93,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 20),
         userLikes: [],
-        hashtags: hashtagsData[7]._id, // paris
+        hashtags: [hashtagsData[7]._id], // paris
       },
       {
         author: userIds[0], // Alexandre
@@ -102,7 +102,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 8),
         userLikes: [],
-        hashtags: hashtagsData[2]._id, // javascript
+        hashtags: [hashtagsData[2]._id], // javascript
       },
       {
         author: userIds[1], // Henri
@@ -111,7 +111,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 25),
         userLikes: [],
-        hashtags: hashtagsData[4]._id, // webdev
+        hashtags: [hashtagsData[4]._id], // webdev
       },
       {
         author: userIds[2], // Etienne
@@ -120,7 +120,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 17),
         userLikes: [],
-        hashtags: hashtagsData[5]._id, // react
+        hashtags: [hashtagsData[5]._id], // react
       },
       {
         author: userIds[0], // Alexandre
@@ -128,7 +128,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 22),
         userLikes: [],
-        hashtags: hashtagsData[9]._id, // dev
+        hashtags: [hashtagsData[9]._id], // dev
       },
       {
         author: userIds[1], // Henri
@@ -137,7 +137,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 14),
         userLikes: [],
-        hashtags: hashtagsData[6]._id, // nodejs
+        hashtags: [hashtagsData[6]._id], // nodejs
       },
       {
         author: userIds[2], // Etienne
@@ -146,7 +146,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 18),
         userLikes: [],
-        hashtags: hashtagsData[0]._id, // tech
+        hashtags: [hashtagsData[0]._id], // tech
       },
       {
         author: userIds[0], // Alexandre
@@ -155,7 +155,7 @@ const generateMock = async (req, res, next) => {
         submittedAt: getRandomRecentDate(),
         likes: Math.floor(Math.random() * 10),
         userLikes: [],
-        hashtags: hashtagsData[3]._id, // mongodb
+        hashtags: [hashtagsData[3]._id], // mongodb
       },
     ];
 
