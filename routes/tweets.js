@@ -5,6 +5,6 @@ const { searchTweets,submitTweet } = require("../controllers/tweets");
 const { checkSecurity } = require("../middlewares/security");
 
 router.get("/", searchTweets);
-router.post("/",checkSecurity,submitTweet);
+router.post("/",submitTweet);
 
 module.exports = router;

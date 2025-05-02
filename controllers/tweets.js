@@ -13,8 +13,7 @@ const searchTweets = async (req, res, next) => {
 
 const submitTweet=async(req, res, next) => {
   try {
-    console.log("adding tweet");
-    console.log(req.body);
+    console.log(" controllers adding tweet->",req.body);
     const submittedTweet = await addTweet(req.body);
     res.json(submittedTweet);
     return submittedTweet;
