@@ -17,4 +17,7 @@ const getNbTweetsByHashtag = async (hashtagId) => {
   return await Tweet.countDocuments({ hashtags: hashtagId });
 };
 
-module.exports = { getTweets, getNbTweetsByHashtag, addTweet };
+const getTweetById = async (tweetId) => {
+  return await Tweet.findById(tweetId);
+}
+module.exports = { getTweets, getNbTweetsByHashtag, addTweet,getTweetById };
