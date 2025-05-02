@@ -8,12 +8,12 @@ const getUserByUsername = async (username) => {
   });
 };
 
-const userSignup = async ({ username, password, firstName }) => {
+const userSignup = async ({ username, password, firstname }) => {
   const hash = bcrypt.hashSync(password, 10);
 
   const newUser = new User({
     username,
-    firstName,
+    firstname,
     password: hash,
     token: uid2(32),
   });
