@@ -4,10 +4,7 @@ const getTweets = async () => {
   return await Tweet.find({}).sort({ submittedAt: -1 });
 };
 
-
-
-const addTweet=async(data) => {
-
+const addTweet = async (data) => {
   console.log("repo - data that will be posted in the db : ", data);
   let newTweet = new Tweet({ ...data });
 
@@ -16,5 +13,8 @@ const addTweet=async(data) => {
   return newTweet;
 };
 
+const getNbTweetsByHashtag = async (hashtagId) => {
+  return await Tweet.countDocuments({ hashtags: hashtagId });
+};
 
-module.exports = { getTweets,addTweet };
+module.exports = { getTweets, getNbTweetsByHashtag, addTweet };
