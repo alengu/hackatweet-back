@@ -11,8 +11,8 @@ const signup = async (req, res, next) => {
     const user = await getUserByUsername(req.body.username.toLowerCase());
 
     if (user === null) {
-      const { token, username, firstname } = await userSignup(req.body);
-      res.json({ token, username, firstname });
+      const { token, username, firstname, _id } = await userSignup(req.body);
+      res.json({ token, username, firstname, _id });
     } else {
       res.status(409).json({ error: "User already exists" });
     }
@@ -31,7 +31,7 @@ const signin = async (req, res, next) => {
     const user = await getUserByUsername(req.body.username.toLowerCase());
 
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      res.json({ token: user.token });
+      res.json({ token: user.token, _id: user._id });
     } else {
       res.json.status(401).json({ error: "User not found or wrong password" });
     }
