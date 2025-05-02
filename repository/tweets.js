@@ -4,4 +4,17 @@ const getTweets = async () => {
   return await Tweet.find({}).sort({ submittedAt: -1 });
 };
 
-module.exports = { getTweets };
+
+
+const addTweet=async(data) => {
+
+  console.log("repo - data that will be posted in the db : ", data);
+  let newTweet = new Tweet({ ...data });
+
+  await newTweet.save();
+  console.log("repo - new tweet loaded: ", newTweet);
+  return newTweet;
+};
+
+
+module.exports = { getTweets,addTweet };

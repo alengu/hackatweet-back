@@ -1,4 +1,4 @@
-const { getTweets } = require("../repository/tweets");
+const { getTweets,addTweet } = require("../repository/tweets");
 
 const searchTweets = async (req, res, next) => {
   try {
@@ -11,4 +11,18 @@ const searchTweets = async (req, res, next) => {
   }
 };
 
-module.exports = { searchTweets };
+const submitTweet=async(req, res, next) => {
+  try {
+    console.log("adding tweet");
+    console.log(req.body);
+    const submittedTweet = await addTweet(req.body);
+    res.json(submittedTweet);
+    return submittedTweet;
+  } catch (exception) {
+    console.log(exception);
+    res.status(500).json({ error: "internal Servor Error with db" });
+  }
+}
+
+
+module.exports = { searchTweets, submitTweet };
