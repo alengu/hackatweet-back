@@ -1,22 +1,12 @@
 const mongoose = require("mongoose");
 
 const tweetsSchema = mongoose.Schema({
-  author: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  submittedAt: {
-    type: Date,
-    required: true,
-  },
-  userLikes: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+  content: { type: String, required: true },
+  submittedAt: Date,
+  likes: { type: Number, default: 0 },
+  userLikes: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+  hashtags: { type: mongoose.Schema.Types.ObjectId, ref: "hashtags" },
 });
 
 const tweetsModel = mongoose.model("tweets", tweetsSchema);
