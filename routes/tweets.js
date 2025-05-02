@@ -9,7 +9,8 @@ const {
 const { checkSecurity } = require("../middlewares/security");
 
 router.get("/", searchTweets);
-router.post("/", checkSecurity, submitTweet);
+router.post("/", submitTweet);
+//router.post("/", checkSecurity, submitTweet);
 router.get("/generateMock", generateMock);
 
 module.exports = router;
