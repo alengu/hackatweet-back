@@ -31,7 +31,12 @@ const signin = async (req, res, next) => {
     const user = await getUserByUsername(req.body.username.toLowerCase());
 
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      res.json({ token: user.token, _id: user._id });
+      res.json({
+        token: user.token,
+        _id: user._id,
+        username: user.username,
+        firstname: user.firstname,
+      });
     } else {
       res.json.status(401).json({ error: "User not found or wrong password" });
     }
