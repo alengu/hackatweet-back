@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt");
 const uid2 = require("uid2");
 
 const getUserByUsername = async (username) => {
-  return await User.findOne({ username });
+  return await User.findOne({
+    username: { $regex: new RegExp("^" + username + "$", "i") },
+  });
 };
 
 const userSignup = async ({ username, password, firstName }) => {

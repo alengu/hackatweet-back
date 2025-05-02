@@ -8,7 +8,7 @@ const signup = async (req, res, next) => {
       return res.status(400).json({ error: "Missing or empty fields" });
     }
 
-    const user = await getUserByUsername(req.body.username);
+    const user = await getUserByUsername(req.body.username.toLowerCase());
 
     if (user === null) {
       const { token, username, firstName } = await userSignup(req.body);
@@ -28,7 +28,7 @@ const signin = async (req, res, next) => {
       return res.status(400).json({ error: "Missing or empty fields" });
     }
 
-    const user = await getUserByUsername(req.body.username);
+    const user = await getUserByUsername(req.body.username.toLowerCase());
 
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
       res.json({ token: user.token });
