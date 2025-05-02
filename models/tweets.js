@@ -5,8 +5,8 @@ const tweetsSchema = mongoose.Schema({
   content: { type: String, required: true },
   submittedAt: Date,
   likes: { type: Number, default: 0 },
-  userLikes: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-  hashtags: { type: mongoose.Schema.Types.ObjectId, ref: "hashtags" },
+  userLikes: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
+  hashtags: [{ type: mongoose.Schema.Types.ObjectId, ref: "hashtags" }],
 });
 
 const tweetsModel = mongoose.model("tweets", tweetsSchema);

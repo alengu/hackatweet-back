@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 const hashtagsSchema = mongoose.Schema({
-  type: String,
-  required: true,
+  name: {
+    type: String,
+    required: true,
+  },
 });
 
 const hashtagsModel = mongoose.model("hashtags", hashtagsSchema);

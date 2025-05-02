@@ -4,15 +4,15 @@ const bcrypt = require("bcrypt");
 
 const signup = async (req, res, next) => {
   try {
-    if (!checkBody(req.body, ["username", "password", "firstName"])) {
+    if (!checkBody(req.body, ["username", "password", "firstname"])) {
       return res.status(400).json({ error: "Missing or empty fields" });
     }
 
     const user = await getUserByUsername(req.body.username.toLowerCase());
 
     if (user === null) {
-      const { token, username, firstName } = await userSignup(req.body);
-      res.json({ token, username, firstName });
+      const { token, username, firstname } = await userSignup(req.body);
+      res.json({ token, username, firstname });
     } else {
       res.status(409).json({ error: "User already exists" });
     }
