@@ -1,4 +1,5 @@
 const Tweet = require("../models/tweets");
+const mongoose = require("mongoose");
 
 const getTweets = async () => {
   return await Tweet.find({}).sort({ submittedAt: -1 });
@@ -19,5 +20,27 @@ const getNbTweetsByHashtag = async (hashtagId) => {
 
 const getTweetById = async (tweetId) => {
   return await Tweet.findById(tweetId);
-}
-module.exports = { getTweets, getNbTweetsByHashtag, addTweet,getTweetById };
+};
+
+const likeTweet = async (tweetId, userId) => {
+  return await Tweet.updateOne(
+    { _id: tweetId },
+    { $push: { userLikes: userId } }
+  );
+};
+
+const unLikeTweet = async (tweetId, userId) => {
+  return await Tweet.updateOne(
+    { _id: tweetId },
+    { $pull: { userLikes: userId } }
+  );
+};
+
+module.exports = {
+  getTweets,
+  getNbTweetsByHashtag,
+  addTweet,
+  getTweetById,
+  likeTweet,
+  unLikeTweet,
+};
