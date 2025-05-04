@@ -1,4 +1,4 @@
-const { getTweets,getTweetById,  addTweet } = require("../repository/tweets");
+const { getTweets,getTweetById,  addTweet, deleteTweetById } = require("../repository/tweets");
 const Tweet = require("../models/tweets");
 const Hashtag = require("../models/hashtags");
 const mongoose = require("mongoose");
@@ -37,6 +37,19 @@ const submitTweet = async (req, res, next) => {
     res.status(500).json({ error: "internal Servor Error with db" });
   }
 };
+
+const deleteTweet = async (req, res, next) =>{
+  try{
+    const tweet = await deleteTweetById(req.params.tweetId);
+
+    res.json(tweet);
+
+  }
+  catch(exception) {
+    console.log(exception)
+    res.status(500).json({error:"Internal Server Error"})
+  }
+}
 
 const generateMock = async (req, res, next) => {
   try {
@@ -204,4 +217,4 @@ tweetsData.forEach((tweet, index) => {
   }
 };
 
-module.exports = { searchTweets, submitTweet, generateMock ,findTweetById};
+module.exports = { searchTweets, submitTweet, generateMock ,findTweetById, deleteTweet};

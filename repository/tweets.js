@@ -20,4 +20,8 @@ const getNbTweetsByHashtag = async (hashtagId) => {
 const getTweetById = async (tweetId) => {
   return await Tweet.findById(tweetId);
 }
-module.exports = { getTweets, getNbTweetsByHashtag, addTweet,getTweetById };
+
+const deleteTweetById = async (tweetId) => {
+  return await Tweet.deleteOne({ _id: tweetId});
+}
+module.exports = { getTweets, getNbTweetsByHashtag, addTweet,getTweetById, deleteTweetById };
