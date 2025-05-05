@@ -1,7 +1,15 @@
-const { getTweets,getTweetById,  addTweet, deleteTweetById } = require("../repository/tweets");
+const {
+  getTweets,
+  getTweetById,
+  addTweet,
+  deleteTweetById,
+  likeTweet,
+  unLikeTweet,
+} = require("../repository/tweets");
 const Tweet = require("../models/tweets");
 const Hashtag = require("../models/hashtags");
 const mongoose = require("mongoose");
+const { addHashtagsAndTotal } = require("../services/tweetServices");
 
 const searchTweets = async (req, res, next) => {
   try {
@@ -14,42 +22,39 @@ const searchTweets = async (req, res, next) => {
   }
 };
 
-const findTweetById = async (req, res, next) =>{
-  try{
+const findTweetById = async (req, res, next) => {
+  try {
     const tweet = await getTweetById(req.params.tweetId);
-    res.json(tweet)
-
+    res.json(tweet);
+  } catch (exception) {
+    console.log(exception);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  catch(exception) {
-    console.log(exception)
-    res.status(500).json({error:"Internal Server Error"})
-  }
-}
+};
 
 const submitTweet = async (req, res, next) => {
   try {
-    console.log(" controllers adding tweet->",req.body);
-    const submittedTweet = await addTweet(req.body);
-    res.json(submittedTweet);
-    return submittedTweet;
+    console.log(" controllers adding tweet->", req.body);
+
+    const submittedTweet = await addHashtagsAndTotal(req.body);
+
+    return res.json(submittedTweet);
   } catch (exception) {
     console.log(exception);
     res.status(500).json({ error: "internal Servor Error with db" });
   }
 };
 
-const deleteTweet = async (req, res, next) =>{
-  try{
+const deleteTweet = async (req, res, next) => {
+  try {
     const tweet = await deleteTweetById(req.params.tweetId);
 
     res.json(tweet);
-
+  } catch (exception) {
+    console.log(exception);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  catch(exception) {
-    console.log(exception)
-    res.status(500).json({error:"Internal Server Error"})
-  }
-}
+};
 
 const generateMock = async (req, res, next) => {
   try {
@@ -217,4 +222,32 @@ tweetsData.forEach((tweet, index) => {
   }
 };
 
-module.exports = { searchTweets, submitTweet, generateMock ,findTweetById, deleteTweet};
+const userlikeTweet = async (req, res, next) => {
+  try {
+    const data = await likeTweet(req.body.tweetId, req.body.userId);
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).jsson({ error: "Internal Server Error" });
+  }
+};
+
+const userUnlikeTweet = async (req, res, next) => {
+  try {
+    const data = await unLikeTweet(req.body.tweetId, req.body.userId);
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).jsson({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = {
+  searchTweets,
+  submitTweet,
+  generateMock,
+  findTweetById,
+  userlikeTweet,
+  userUnlikeTweet,
+  deleteTweet,
+};
