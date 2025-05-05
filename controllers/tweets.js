@@ -2,6 +2,7 @@ const {
   getTweets,
   getTweetById,
   addTweet,
+  deleteTweetById,
   likeTweet,
   unLikeTweet,
 } = require("../repository/tweets");
@@ -41,6 +42,17 @@ const submitTweet = async (req, res, next) => {
   } catch (exception) {
     console.log(exception);
     res.status(500).json({ error: "internal Servor Error with db" });
+  }
+};
+
+const deleteTweet = async (req, res, next) => {
+  try {
+    const tweet = await deleteTweetById(req.params.tweetId);
+
+    res.json(tweet);
+  } catch (exception) {
+    console.log(exception);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -237,4 +249,5 @@ module.exports = {
   findTweetById,
   userlikeTweet,
   userUnlikeTweet,
+  deleteTweet,
 };

@@ -38,11 +38,15 @@ const unLikeTweet = async (tweetId, userId) => {
   );
 };
 
+const deleteTweetById = async (tweetId) => {
+  return await Tweet.deleteOne({ _id: tweetId });
+};
 module.exports = {
   getTweets,
   getNbTweetsByHashtag,
   addTweet,
   getTweetById,
+  deleteTweetById,
   likeTweet,
   unLikeTweet,
 };

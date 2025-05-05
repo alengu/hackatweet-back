@@ -7,12 +7,14 @@ const {
   generateMock,
   findTweetById,
   userUnlikeTweet,
-  userlikeTweet
+  userlikeTweet,
+  deleteTweet,
 } = require("../controllers/tweets");
 const { checkSecurity } = require("../middlewares/security");
 
 router.get("/", searchTweets);
 router.post("/", submitTweet);
+router.delete("/:tweetId", deleteTweet);
 // router.post("/", checkSecurity, submitTweet);
 router.get("/generateMock", generateMock);
 router.get("/userlikes/:tweetId", findTweetById);
