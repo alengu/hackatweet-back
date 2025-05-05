@@ -16,11 +16,7 @@ const getHashtagsAndTotal = async () => {
   const data = await Promise.all(promises);
   const sortedData = data.sort((a, b) => b.nbTweets - a.nbTweets);
 
-  return sortedData;
-};
-
-const addTweetAndManageHashtag = async (data) => {
-  await addTweet(data);
+  return sortedData.filter((elm) => elm.nbTweets > 0);
 };
 
 module.exports = { getHashtagsAndTotal };

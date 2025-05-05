@@ -13,7 +13,8 @@ const { addHashtagsAndTotal } = require("../services/tweetServices");
 
 const searchTweets = async (req, res, next) => {
   try {
-    const tweets = await getTweets();
+    const { hashtag } = req.query;
+    const tweets = await getTweets(hashtag);
 
     res.json(tweets);
   } catch (exception) {

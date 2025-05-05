@@ -1,8 +1,43 @@
 const Tweet = require("../models/tweets");
 const mongoose = require("mongoose");
 
-const getTweets = async () => {
-  return await Tweet.find({}).sort({ submittedAt: -1 });
+const getTweets = async (hashtagName) => {
+  if (!hashtagName) {
+    return await Tweet.find()
+      .populate("hashtags")
+      .populate("author")
+      .sort({ submittedAt: -1 });
+  }
+
+  return await Tweet.aggregate([
+    {
+      $lookup: {
+        from: "hashtags",
+        localField: "hashtags",
+        foreignField: "_id",
+        as: "hashtags",
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "author",
+        foreignField: "_id",
+        as: "author",
+      },
+    },
+    {
+      $unwind: "$author",
+    },
+    {
+      $match: {
+        "hashtags.name": hashtagName,
+      },
+    },
+    {
+      $sort: { submittedAt: -1 },
+    },
+  ]);
 };
 
 const addTweet = async (data) => {
