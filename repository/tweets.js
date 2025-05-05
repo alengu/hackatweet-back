@@ -15,7 +15,9 @@ const addTweet = async (data) => {
 };
 
 const getNbTweetsByHashtag = async (hashtagId) => {
-  return await Tweet.countDocuments({ hashtags: hashtagId });
+  return await Tweet.countDocuments({
+    hashtags: new mongoose.Types.ObjectId(hashtagId),
+  });
 };
 
 const getTweetById = async (tweetId) => {

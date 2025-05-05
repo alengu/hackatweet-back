@@ -8,6 +8,7 @@ const {
 const Tweet = require("../models/tweets");
 const Hashtag = require("../models/hashtags");
 const mongoose = require("mongoose");
+const { addHashtagsAndTotal } = require("../services/tweetServices");
 
 const searchTweets = async (req, res, next) => {
   try {
@@ -33,9 +34,10 @@ const findTweetById = async (req, res, next) => {
 const submitTweet = async (req, res, next) => {
   try {
     console.log(" controllers adding tweet->", req.body);
-    const submittedTweet = await addTweet(req.body);
-    res.json(submittedTweet);
-    return submittedTweet;
+
+    const submittedTweet = await addHashtagsAndTotal(req.body);
+
+    return res.json(submittedTweet);
   } catch (exception) {
     console.log(exception);
     res.status(500).json({ error: "internal Servor Error with db" });

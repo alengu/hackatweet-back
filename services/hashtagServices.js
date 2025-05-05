@@ -1,10 +1,11 @@
 const { getHashtagsDb } = require("../repository/hashtags");
+const { addTweet } = require("../repository/tweets");
+
 const { getNbTweetsByHashtag } = require("../repository/tweets");
 
 const getHashtagsAndTotal = async () => {
   const hashtags = await getHashtagsDb();
-
-  const data = hashtags.map(async (hashtag) => {
+  const promises = hashtags.map(async (hashtag) => {
     return {
       _id: hashtag["_id"],
       name: hashtag.name,
@@ -12,9 +13,14 @@ const getHashtagsAndTotal = async () => {
     };
   });
 
-  console.log(await Promise.all(data));
+  const data = await Promise.all(promises);
+  const sortedData = data.sort((a, b) => b.nbTweets - a.nbTweets);
 
-  return await Promise.all(data);
+  return sortedData;
+};
+
+const addTweetAndManageHashtag = async (data) => {
+  await addTweet(data);
 };
 
 module.exports = { getHashtagsAndTotal };
